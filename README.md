@@ -1,6 +1,6 @@
 # Fantasy Hub (Nov 2026) Tools
 
-Offline static analysis tools for `До_Вылета.apk` (`96cf6822cc7f421cd10cd9ca463b1f04b54929e6b1949743a56531b13d6479ee`). Nothing here runs the sample or touches the network.
+Offline static analysis tools for `До_Вылета.apk` (`96cf6822cc7f421cd10cd9ca463b1f04b54929e6b1949743a56531b13d6479ee`), accompanying the teardown at [jeffmeendering.com/teardowns/fantasy-hub-nov-2026](https://jeffmeendering.com/teardowns/fantasy-hub-nov-2026/). Nothing here runs the sample or touches the network.
 
 - `extract_config.py` unpacks Stages 2 and 3 from the Stage 1 APK, decodes the native Caesar and StringFog strings, and prints JSON (redacts the Telegram token unless `--show-secrets` is passed; AArch64 only for native parsing).
 - `fh_c2crypto.py` decodes (or encodes with `--encrypt`) outgoing WebSocket `{"p": "..."}` frames. It decodes both forms of JNI "modified UTF-8": what a real phone sends (Android's runtime passes emoji as normal 4-byte UTF-8) and the JNI-spec form (two 3-byte surrogate halves). `--encrypt` builds the phone's form by default, or the JNI-spec form with `--jni-spec`.
