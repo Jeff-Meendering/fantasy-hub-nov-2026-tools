@@ -762,8 +762,10 @@ def extract_all(apk_path: Path, raw_iocs: bool, show_secrets: bool, user_key32: 
 
     s2_info: dict = {"hashes": hashes_of(s2)}
     report["stage2_template_apk"] = s2_info
-    s2_info["note"] = ("Template as embedded in Stage 1. The dropper renames the package and signs it again "
-                       "on the device, so this hash, certificate, and package name are not expected on victims.")
+    s2_info["note"] = ("Template as embedded in Stage 1. On the first install attempt the dropper renames the "
+                       "package and signs it again on the device, so this hash, certificate, and package name "
+                       "normally do not appear on victims; however, a retry after a failed or canceled first "
+                       "install skips the rewriter and installs this unmodified template as is.")
     s2_info["certificates"] = stage("stage2 certificates", lambda: extract_apk_sig_block_certs(s2)) or []
     s2_entries_list = stage("stage2 zip", lambda: read_zip_entries_raw(s2))
     if s2_entries_list is None:
